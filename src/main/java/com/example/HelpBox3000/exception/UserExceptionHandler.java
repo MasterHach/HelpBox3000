@@ -11,7 +11,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import java.sql.SQLException;
 
-@ControllerAdvice("com.example.HelpBox3000.controllers.")
+@ControllerAdvice("com.example.HelpBox3000.controller")
 public class UserExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(RestClientException.class)
     protected ResponseEntity<ApiError> handRequestClientExceptions(RestClientException e) {
@@ -40,6 +40,12 @@ public class UserExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(UnexpectedRoleException.class)
     protected ResponseEntity<ApiError> handUnexpectedRoleException(UnexpectedRoleException exception) {
         ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, exception);
+        return buildResponseEntity(apiError);
+    }
+
+    @ExceptionHandler(PasswordNotMatchException.class)
+    protected ResponseEntity<ApiError> handPasswordNotMatchException(PasswordNotMatchException exception) {
+        ApiError apiError = new ApiError(HttpStatus.UNAUTHORIZED, exception);
         return buildResponseEntity(apiError);
     }
 

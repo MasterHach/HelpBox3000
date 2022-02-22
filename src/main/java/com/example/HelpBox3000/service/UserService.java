@@ -1,9 +1,10 @@
 package com.example.HelpBox3000.service;
 
 import com.example.HelpBox3000.cfg.OrikaCfg;
-import com.example.HelpBox3000.dto.UserDTO;
 import com.example.HelpBox3000.entity.UserEntity;
+import com.example.HelpBox3000.exception.PasswordNotMatchException;
 import com.example.HelpBox3000.exception.UniqueKeyException;
+import com.example.HelpBox3000.exception.UserNotFoundException;
 import com.example.HelpBox3000.repository.UserRepository;
 import lombok.extern.java.Log;
 import ma.glasnost.orika.MapperFacade;
@@ -24,7 +25,6 @@ TODO
 public class UserService {
 
     private final UserRepository userRepository;
-    private final MapperFacade facade = new OrikaCfg();
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -44,7 +44,15 @@ public class UserService {
         return this.userRepository.save(userEntity);
     }
 
-    public UserEntity userAuthorization(String id) {
-        return new UserEntity();
+    public UserEntity userAuthorization(String email, String password) {
+        UserEntity userEntity = this.userRepository.findByEmail(email);
+
+        if(userEntity == null) {
+            throw new UserNotFoundException("Пользователь с таким email не найден!");
+        } else if(!userEntity.getPassword().equals(password.split("\"")[3])) {
+            throw new PasswordNotMatchException("Пароль введен неверно");
+        }
+
+        return userEntity;
     }
 }

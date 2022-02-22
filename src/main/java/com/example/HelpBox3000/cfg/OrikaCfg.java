@@ -10,6 +10,7 @@ public class OrikaCfg extends ConfigurableMapper {
     @Override
     protected void configure(MapperFactory factory) {
         factory.classMap(UserEntity.class, UserDTO.class)
+                .field("id", "userId")
                 .field("email", "userEmail")
                 .field("password", "userPassword")
                 .field("name", "userName")

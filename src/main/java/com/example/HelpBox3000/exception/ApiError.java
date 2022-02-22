@@ -1,20 +1,22 @@
 package com.example.HelpBox3000.exception;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.FormatStyle;
+
+import static java.time.format.DateTimeFormatter.ofLocalizedDate;
 
 @Data
 public class ApiError {
     private HttpStatus status;
-    private Date timestamp;
+    private LocalDateTime timestamp;
     private String message;
     private String debugMessage;
 
     private ApiError() {
-        timestamp = getTimestamp();
+        timestamp = LocalDateTime.now();
     }
 
     ApiError(HttpStatus status) {
