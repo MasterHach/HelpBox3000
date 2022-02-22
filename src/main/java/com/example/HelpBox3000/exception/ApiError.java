@@ -1,4 +1,4 @@
-package com.example.HelpBox3000.ExceptionHendlers;
+package com.example.HelpBox3000.exception;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -9,7 +9,6 @@ import java.util.Date;
 @Data
 public class ApiError {
     private HttpStatus status;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
     private Date timestamp;
     private String message;
     private String debugMessage;
@@ -23,17 +22,17 @@ public class ApiError {
         this.status = status;
     }
 
-    ApiError(HttpStatus status, Throwable ex) {
+    ApiError(HttpStatus status, Throwable exception) {
         this();
         this.status = status;
         this.message = "Unexpected error";
-        this.debugMessage = ex.getLocalizedMessage();
+        this.debugMessage = exception.getLocalizedMessage();
     }
 
-    ApiError(HttpStatus status, String message, Throwable ex) {
+    ApiError(HttpStatus status, String message, Throwable exception) {
         this();
         this.status = status;
         this.message = message;
-        this.debugMessage = ex.getLocalizedMessage();
+        this.debugMessage = exception.getLocalizedMessage();
     }
 }

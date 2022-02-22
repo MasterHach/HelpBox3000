@@ -1,8 +1,12 @@
 package com.example.HelpBox3000.service;
 
+import com.example.HelpBox3000.cfg.OrikaCfg;
+import com.example.HelpBox3000.dto.UserDTO;
 import com.example.HelpBox3000.entity.UserEntity;
+import com.example.HelpBox3000.exception.UniqueKeyException;
 import com.example.HelpBox3000.repository.UserRepository;
 import lombok.extern.java.Log;
+import ma.glasnost.orika.MapperFacade;
 import org.springframework.stereotype.Service;
 
 import java.util.logging.Level;
@@ -20,6 +24,7 @@ TODO
 public class UserService {
 
     private final UserRepository userRepository;
+    private final MapperFacade facade = new OrikaCfg();
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -31,6 +36,11 @@ public class UserService {
     */
     public UserEntity userRegistration(UserEntity userEntity) {
         log.log(Level.INFO, userEntity.toString());
+
+        if (this.userRepository.findByEmail(userEntity.getEmail()) != null) {
+            throw new UniqueKeyException("Пользователь с данным email уже зарегестрирован!");
+        }
+
         return this.userRepository.save(userEntity);
     }
 
