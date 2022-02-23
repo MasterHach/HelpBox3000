@@ -15,7 +15,7 @@ repositories {
 jar {
     manifest {
         attributes(
-                'Class-Path': configurations.collect { it.getName() }.join(' '),
+                'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
                 'Main-Class': 'com.example.HelpBox3000.HelpBox3000Application'
         )
     }
