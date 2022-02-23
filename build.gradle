@@ -15,7 +15,7 @@ repositories {
 jar {
     manifest {
         attributes(
-                'Main-Class': 'com.example.HelpBox3000.HelpBox3000'
+                'Main-Class': 'com.example.HelpBox3000'
         )
     }
 }
