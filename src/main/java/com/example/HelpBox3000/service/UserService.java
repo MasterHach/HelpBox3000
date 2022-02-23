@@ -14,7 +14,7 @@ import java.util.logging.Level;
 
 /*
 TODO
-    Регистрация полььзователей(все проверки на фронте - валидация значений и матчи мейлов в бд)
+    Регистрация полььзователей(все проверки на фронте - валидация значений в бд)
     Получение списка пользователей
     Обновление данных пользователя
     Удаление аккаунта
@@ -30,10 +30,6 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-
-    /*
-        Метод регистрации пользователей(внесение в бд) без проверке на стороне бэка
-    */
     public UserEntity userRegistration(UserEntity userEntity) {
         log.log(Level.INFO, userEntity.toString());
 
