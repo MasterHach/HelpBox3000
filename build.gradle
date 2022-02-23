@@ -16,7 +16,7 @@ jar {
     manifest {
         attributes(
                 'Class-Path': configurations.collect { it.getName() }.join(' '),
-                'Main-Class': 'com.example.HelpBox3000'
+                'Main-Class': 'com.example.HelpBox3000.HelpBox3000'
         )
     }
 }
