@@ -17,17 +17,23 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-    private MapperFacade facade = new OrikaCfg();
+    private final MapperFacade facade = new OrikaCfg();
 
     @PostMapping(value = "/registration")
     public ResponseEntity<UserDTO> registrationUsers(@RequestBody UserEntity userEntity) {
         UserDTO result = this.facade.map(this.userService.userRegistration(userEntity), UserDTO.class);
-        return new ResponseEntity<UserDTO>(result, HttpStatus.OK);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @GetMapping(value = "/auth")
     public ResponseEntity<UserDTO> authorizationUser(@RequestParam String email, @RequestBody String password) {
         UserDTO result = this.facade.map(this.userService.userAuthorization(email, password), UserDTO.class);
-        return new ResponseEntity<UserDTO>(result, HttpStatus.OK);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/getUser")
+    public ResponseEntity<UserDTO> getUserById(@RequestParam long id) {
+        UserDTO result = this.facade.map(this.userService.getUserById(id), UserDTO.class);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

@@ -5,5 +5,5 @@ CREATE TABLE IF NOT EXISTS Users
     password VARCHAR(255),
     name VARCHAR(32),
     surname VARCHAR(32),
-    role VARCHAR(10)
+    role VARCHAR(1)
 );
