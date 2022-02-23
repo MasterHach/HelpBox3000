@@ -7,14 +7,18 @@ plugins {
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '8'
-jar.manifest {
-        attributes 'Main-Class': 'com.example.HelpBox3000.HelpBox3000Application'
+
+jar {
+    manifest {
+        attributes (
+                'Main-Class': 'com.example.HelpBox3000.HelpBox3000Application'
+        )
+    }
 }
 
 repositories {
     mavenCentral()
 }
-
 
 
 dependencies {
